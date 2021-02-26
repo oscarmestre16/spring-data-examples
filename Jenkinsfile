@@ -14,11 +14,8 @@ pipeline {
           steps {
 		withMaven (maven: 'maven-3.6.3') {
 			sh 'mvn clean install -f web/pom.xml'
-			//sh 'mvn clean install -f elasticsearch/pom.xml'
-			//sh 'mvn clean install -f mongodb/pom.xml'
-			//sh 'mvn clean install -f rest/pom.xml'
-		    }
-    		}
+		}
+    	}
 			
 	  post {
             always {
