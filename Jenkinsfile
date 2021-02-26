@@ -15,8 +15,10 @@ pipeline {
               sh 'mvn clean install -f web/pom.xml'
             }
           }
-          post{
-            junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
+          post {
+	   always{
+            	junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
+	   }
           }
         }
         // Lanzamos en paralelo la comprobacion de dependencias y los mutation test
