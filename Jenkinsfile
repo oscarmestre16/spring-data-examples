@@ -32,12 +32,12 @@ pipeline {
         // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
         stage('SonarQube analysis') {
         	steps {
-            withSonarQubeEnv(credentialsId: '', installationName: '') {
+            withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
               withMaven (maven: 'maven-3.6.3') {
-                sh 'mvn sonar:sonar -f web/pom.xml' \
+                sh 'mvn sonar:sonar -f web/pom.xml \
                 -Dsonar.sourceEncoding=UTF-8 \
-                -Dsonar.login='admin' \
-                -Dsonar.password='oscarmestre'
+                -Dsonar.login=admin \
+                -Dsonar.password=oscarmestre'
               }
 		    	}
 			}
