@@ -10,16 +10,22 @@ pipeline {
 		
         // Compilamos el proyecto y almacenamos los test unitarios y de integracion
        	stage('Build') {
-        	steps {
-            withMaven (maven: 'maven-3.6.3') {
-              sh 'mvn clean install -f web/pom.xml'
-            }
-          }
-          post {
-	   always{
-            	junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
+		
+          steps {
+		withMaven (maven: 'maven-3.6.3') {
+			sh 'mvn clean install -f web/pom.xml'
+			//sh 'mvn clean install -f elasticsearch/pom.xml'
+			//sh 'mvn clean install -f mongodb/pom.xml'
+			//sh 'mvn clean install -f rest/pom.xml'
+		    }
+    		}
+			
+	  post {
+            always {
+                    junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
 	   }
           }
+		
         }
         // Lanzamos en paralelo la comprobacion de dependencias y los mutation test
         stage('Mutation Test') {
