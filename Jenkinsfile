@@ -13,7 +13,7 @@ pipeline {
 		
           steps {
 		withMaven (maven: 'Maven 3.6.3') {
-			sh 'mvn clean install -f web/pom.xml'
+			bat 'mvn clean install -f web/pom.xml'
 		}
     	}
 			
@@ -29,7 +29,7 @@ pipeline {
 			// Lanzamos los mutation test			
             steps {
               withMaven (maven: 'Maven 3.6.3') {
-                sh 'mvn org.pitest:pitest-maven:mutationCoverage -f web/pom.xml'
+                bat 'mvn org.pitest:pitest-maven:mutationCoverage -f web/pom.xml'
               }
             }
 			
@@ -39,7 +39,7 @@ pipeline {
         	steps {
             withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
               withMaven (maven: 'Maven 3.6.3') {
-                sh 'mvn sonar:sonar -f web/pom.xml \
+                bat 'mvn sonar:sonar -f web/pom.xml \
                 -Dsonar.sourceEncoding=UTF-8 \
 		-Dsonar.junit.reportPaths=target/surefire-reports\
                 -Dsonar.login=admin \
