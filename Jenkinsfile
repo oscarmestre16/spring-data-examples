@@ -12,7 +12,7 @@ pipeline {
        	stage('Build') {
 		
           steps {
-		withMaven (maven: 'maven-3.6.3') {
+		withMaven (maven: 'Maven 3.6.3') {
 			sh 'mvn clean install -f web/pom.xml'
 		}
     	}
@@ -28,7 +28,7 @@ pipeline {
         stage('Mutation Test') {
 			// Lanzamos los mutation test			
             steps {
-              withMaven (maven: 'maven-3.6.3') {
+              withMaven (maven: 'Maven 3.6.3') {
                 sh 'mvn org.pitest:pitest-maven:mutationCoverage -f web/pom.xml'
               }
             }
@@ -38,7 +38,7 @@ pipeline {
         stage('SonarQube analysis') {
         	steps {
             withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
-              withMaven (maven: 'maven-3.6.3') {
+              withMaven (maven: 'Maven 3.6.3') {
                 sh 'mvn sonar:sonar -f web/pom.xml \
                 -Dsonar.sourceEncoding=UTF-8 \
                 -Dsonar.login=admin \
