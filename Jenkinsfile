@@ -41,6 +41,7 @@ pipeline {
               withMaven (maven: 'Maven 3.6.3') {
                 sh 'mvn sonar:sonar -f web/pom.xml \
                 -Dsonar.sourceEncoding=UTF-8 \
+		-Dsonar.junit.reportPaths=target/surefire-reports\
                 -Dsonar.login=admin \
                 -Dsonar.password=oscarmestre'
               }
