@@ -41,7 +41,7 @@ pipeline {
               withMaven (maven: 'Maven 3.6.3') {
                 bat 'mvn sonar:sonar \
   -Dsonar.projectKey=Spring-data-examples \
-  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.host.url="http://localhost:9000" \
   -Dsonar.login=local'
               }
 		    	}
