@@ -37,14 +37,11 @@ pipeline {
         // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
         stage('SonarQube analysis') {
         	steps {
-            withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
-              withMaven (maven: 'Maven 3.6.3') {
-               // bat ''
-		      bat "mvn sonar:sonar -f web/pom.xml \
+		    	withSonarQubeEnv('SonarQube USAL') {
+		    		bat "mvn sonar:sonar -f web/pom.xml \
 		    		-Dsonar.sourceEncoding=UTF-8 \
 		    		-Dsonar.junit.reportPaths=target/surefire-reports"
-              }
-		    	}
+				}
 			}
 		}
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
