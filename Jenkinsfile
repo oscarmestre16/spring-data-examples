@@ -36,8 +36,7 @@ pipeline {
         }
         // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
         stage('SonarQube analysis') {
-        	steps {
-		    	  	steps {
+          steps {
             withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
               withMaven (maven: 'Maven 3.6.3') {
                 bat 'mvn sonar:sonar -f web/pom.xml \
@@ -46,10 +45,10 @@ pipeline {
 		-Dsonar.junit.reportPaths=target/surefire-reports\
                 -Dsonar.login=admin \
                 -Dsonar.password=oscarmestre'
-
-		    	}
-			}
-		}
+	      }
+	     }
+	   }
+	}
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
 		stage("Quality Gate") {
             steps {
