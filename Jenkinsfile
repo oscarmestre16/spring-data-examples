@@ -40,7 +40,6 @@ pipeline {
             withSonarQubeEnv(credentialsId: '8360d0699f13cb4748e20aab19aa98f923443bab', installationName: 'local') {
               withMaven (maven: 'Maven 3.6.3') {
                 bat 'mvn sonar:sonar -f web/pom.xml \
-		      -Dsonar.host.url="http://localhost:9000" \
                 -Dsonar.sourceEncoding=UTF-8 \
 		-Dsonar.junit.reportPaths=target/surefire-reports\
                 -Dsonar.login=admin \
