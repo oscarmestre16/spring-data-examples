@@ -34,10 +34,17 @@
 			<artifactId>xmlprojector</artifactId>
 			<version>1.4.13</version>
 		</dependency>
+	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
 	<build>
+		<finalName>maven-code-coverage</finalName>
 		<plugins>
 
 			<plugin>
@@ -46,6 +53,11 @@
 			</plugin>
 			
 			 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
@@ -64,6 +76,7 @@
                     </execution>
                 </executions>
             </plugin>
+			
 		</plugins>
 	</build>
 
