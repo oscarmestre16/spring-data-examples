@@ -46,15 +46,9 @@ pipeline {
 			     }
 		   }
 	}
-	stage('nexusPublisher') {
+	stage('Nexus Publisher') {
 		  steps {
-			     
-	    nexusInstanceId: 'maven-releases', 
-	    nexusRepositoryId: 'maven-releases', 
-	    packages: [[$class: 'MavenPackage', 
-	    mavenAssetList: [[classifier: '', extension: '', filePath: ' \\target\\maven-tutorial-1.0.1.jar']], 
-	    mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]
-	    
+			  nexusPublisher nexusInstanceId: 'maven-releases', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]
 		   }
 	}
 	    
