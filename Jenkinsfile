@@ -48,8 +48,10 @@ pipeline {
 	}
 	stage('Nexus Publisher') {
 		  steps {
-			  nexusPublisher nexusInstanceId: 'maven-releases', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]
-		   }
+			nexusPublisher nexusInstanceId: 'maven-releases', nexusRepositoryId: 'maven-releases', packages: [[$class:
+			'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: ' \\target\\*.jar']], 
+			mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]	 
+		  }
 	}
 	    
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
