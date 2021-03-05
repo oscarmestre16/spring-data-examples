@@ -49,7 +49,7 @@ pipeline {
 	stage('Nexus Publisher') {
 		  steps {
 			nexusPublisher nexusInstanceId: 'maven-releases', nexusRepositoryId: 'maven-releases', packages: [[$class:
-			'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: ' \\target\\*.jar']], 
+			'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: ' \\web\\*.jar']], 
 			mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]	 
 		  }
 	}
