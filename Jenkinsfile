@@ -46,6 +46,18 @@ pipeline {
 			     }
 		   }
 	}
+	stage('nexusPublisher') {
+		  steps {
+			     
+	    nexusInstanceId: 'maven-releases', 
+	    nexusRepositoryId: 'maven-releases', 
+	    packages: [[$class: 'MavenPackage', 
+	    mavenAssetList: [[classifier: '', extension: '', filePath: ' \\target\\maven-tutorial-1.0.1.jar']], 
+	    mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]
+	    
+		   }
+	}
+	    
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
 	//stage("Quality Gate") {
           // steps {
