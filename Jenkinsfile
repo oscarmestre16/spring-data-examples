@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'master'
+                git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'web'
             }
         } 
 		
@@ -14,6 +14,7 @@ pipeline {
           steps {
 		withMaven (maven: 'Maven 3.6.3') {
 			bat 'mvn clean install -f web/pom.xml'
+			bat 'mvn clean install -f web/example/pom.xml
 			bat 'mvn clean install -f web/projection/pom.xml'
 			bat 'mvn clean install -f web/querydsl/pom.xml'
 		}
@@ -52,19 +53,22 @@ pipeline {
 	stage("Quality Gate") {
            steps {
                 timeout(time: 10, unit: 'MINUTES') {
-                     Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                     //Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
                      true = set pipeline to UNSTABLE, false = don't
-                     Requires SonarQube Scanner for Jenkins 2.7+
+                     //Requires SonarQube Scanner for Jenkins 2.7+
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
-
 	 //stage('Nexus Publisher') {
 	//	  steps {
 	//		nexusPublisher nexusInstanceId: 'maven-releases', nexusRepositoryId: 'maven-releases', packages: [[$class:
 	//		'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: ' \\web\\*.jar']], 
-	//		mavenCoordinate: [artifactId: 'spring-data-examples', groupId: 'org.springframework.data.examples', packaging: 'jar', version: '2.0.0.BUILD-SNAPSHOT']]]	 
+	//		mavenCoordinate: [
+	//		artifactId: 'spring-data-examples',
+ 	//		groupId: 'org.springframework.data.examples',
+	//		packaging: 'jar',
+	//		version: '2.0.0.BUILD-SNAPSHOT']]]	 
 	//	  }
 	//}
     }
