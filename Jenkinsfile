@@ -6,8 +6,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         // Puede ser http o https
         NEXUS_PROTOCOL = "http"
-        // Dónde se ejecuta tu Nexus
-        
+        // Dónde se ejecuta tu Nexus        
         NEXUS_URL = "192.168.43.172:8081"
         // Repositorio donde subiremos el artefacto
         NEXUS_REPOSITORY = "springs-data-examples-web/"
@@ -63,16 +62,16 @@ pipeline {
 		   }
 	}
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
-	//stage("Quality Gate") {
-          // steps {
-               // timeout(time: 5, unit: 'MINUTES') {
+	stage("Quality Gate") {
+           steps {
+                timeout(time: 5, unit: 'MINUTES') {
                      //Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
                      //true = set pipeline to UNSTABLE, false = don't
                      //Requires SonarQube Scanner for Jenkins 2.7+
-                   // waitForQualityGate abortPipeline: true
-              //  }
-           // }
-      //  }
+                   waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 	
 	stage("Nexus - Example") {
             steps {
