@@ -13,7 +13,7 @@ pipeline {
         NEXUS_REPOSITORY = "springs-data-examples-web/"
         // Identificación de credencial de Jenkins para autenticarse en Nexus OSS
         NEXUS_ID = "Nexus_Token"
-	
+	}
     stages {
         stage('Setup') {
             steps {
@@ -73,6 +73,7 @@ pipeline {
               //  }
            // }
       //  }
+	
 	stage("Nexus Example") {
             steps {
                 script {
@@ -109,6 +110,5 @@ pipeline {
                 }
             }
         }
-	
     }
 }
