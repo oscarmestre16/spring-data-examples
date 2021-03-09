@@ -145,7 +145,7 @@ pipeline {
                 }
             }
         }
-	    stage("Nexus -Querydsl") {
+	    stage("Nexus - Querydsl") {
             steps {
                 script {
                     pom = readMavenPom file: "web/querydsl/pom.xml";
