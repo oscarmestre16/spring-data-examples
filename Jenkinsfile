@@ -66,7 +66,7 @@ pipeline {
         //}
 	 stage('Nexus - Example') {
 		steps {			
-			nexusArtifactUploader 
+			nexusArtifactUploader( 
 				artifacts: [
 					[artifactId: 'pom.artifactId',
 					classifier: '',
@@ -83,7 +83,8 @@ pipeline {
 				nexusVersion: 'nexus3',
 				protocol: 'http',
 				repository: 'springs-data-examples-web/',
-				version: 'pom.parent.version'		 
+				version: 'pom.parent.version'	
+				);
         }
     }
 }
