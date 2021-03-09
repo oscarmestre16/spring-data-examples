@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 pipeline {
-       agent any
+    agent any
 	environment {
         // Puede ser nexus3 o nexus2
         NEXUS_VERSION = "nexus3"
@@ -21,23 +21,25 @@ pipeline {
         } 
 		
         // Compilamos el proyecto y almacenamos los test unitarios y de integracion
-       	stage('Build') {
-		
-          steps {
-		withMaven (maven: 'Maven 3.6.3') {
-			//bat 'mvn clean install -f web/pom.xml'
-			bat 'mvn clean install -f web/example/pom.xml'
-			bat 'mvn clean install -f web/projection/pom.xml'
-			bat 'mvn clean install -f web/querydsl/pom.xml'
-		}
-    	}
+       	stage('Build') {		
+            steps {
+                script {
 			
-	  post {
-           always {
-                 junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
-	  	}
-          }
-		
+					List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]					
+					withMaven (maven: 'Maven 3.6.3') {
+						for (proyecto in arrayWebProject) {
+							println i
+							bat 'mvn clean install -f ' + proyecto
+                            //mvn clean install -f web/example/pom.xml
+						}
+					}           
+    	        }
+            }
+            post {
+                always {
+                    junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
+                }
+            }		
         }
         // Lanzamos en paralelo la comprobacion de dependencias y los mutation test
         stage('Mutation Test') {
@@ -60,123 +62,56 @@ pipeline {
 				      }
 			     }
 		   }
-	}
+	    }
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
-	stage("Quality Gate") {
-           steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                     //Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                     //true = set pipeline to UNSTABLE, false = don't
-                     //Requires SonarQube Scanner for Jenkins 2.7+
-                   waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-	
-	stage("Nexus - Example") {
+        stage("Quality Gate") {
             steps {
-                script {
-                    pom = readMavenPom file: "web/example/pom.xml";
-                    filesByGlob = findFiles(glob: "web/example/target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.parent.groupId}, packaging: ${pom.packaging}, version ${pom.parent.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.parent.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
+                    timeout(time: 5, unit: 'MINUTES') {
+                        //Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                        //true = set pipeline to UNSTABLE, false = don't
+                        //Requires SonarQube Scanner for Jenkins 2.7+
+                    waitForQualityGate abortPipeline: true
                     }
                 }
             }
-        }
-	    stage("Nexus - Projection") {
+        
+        stage("Nexus") {
             steps {
                 script {
-                    pom = readMavenPom file: "web/projection/pom.xml";
-                    filesByGlob = findFiles(glob: "web/example/target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.parent.groupId}, packaging: ${pom.packaging}, version ${pom.parent.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.parent.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
+                    List arrayNexusProject = ["example", "projection", "querydsl"]
 
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
-                }
-            }
-        }
-	    stage("Nexus - Querydsl") {
-            steps {
-                script {
-                    pom = readMavenPom file: "web/querydsl/pom.xml";
-                    filesByGlob = findFiles(glob: "web/example/target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.parent.groupId}, packaging: ${pom.packaging}, version ${pom.parent.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.parent.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
+                    for (nexusProyecto in arrayNexusProject) {
+                        archivo = "web/" + nexusProyecto + "/pom.xml"
+                        archivoTarget = "web/example" + nexusProyecto + "/target/*.${pom.packaging}"
+                        pom = readMavenPom file: archivo;
+                        filesByGlob = findFiles(glob: archivoTarget);
+                        echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                        artifactPath = filesByGlob[0].path;
+                        artifactExists = fileExists artifactPath;
+                        if(artifactExists) {
+                            echo "*** File: ${artifactPath}, group: ${pom.parent.groupId}, packaging: ${pom.packaging}, version ${pom.parent.version}";
+                            nexusArtifactUploader(
+                                nexusVersion: NEXUS_VERSION,
+                                protocol: NEXUS_PROTOCOL,
+                                nexusUrl: NEXUS_URL,
+                                groupId: pom.groupId,
+                                version: pom.parent.version,
+                                repository: NEXUS_REPOSITORY,
+                                credentialsId: NEXUS_ID,
+                                artifacts: [
+                                    [artifactId: pom.artifactId,
+                                    classifier: '',
+                                    file: artifactPath,
+                                    type: pom.packaging],
+                                    [artifactId: pom.artifactId,
+                                    classifier: '',
+                                    file: "pom.xml",
+                                    type: "pom"]
+                               ]
+                            );
+                        } else {
+                            error "*** File: ${artifactPath}, could not be found";
+                        }
                     }
                 }
             }
