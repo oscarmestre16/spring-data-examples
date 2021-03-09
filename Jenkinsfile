@@ -1,6 +1,10 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
+	environment {       
+        	NEXUS_ID = "Nexus_Token"
+   	 }
+	
     stages {
         stage('Setup') {
             steps {
@@ -65,7 +69,7 @@ pipeline {
                 script {
                     pom = readMavenPom file: "web/example/pom.xml";
                    nexusArtifactUploader 
-			credentialsId: 'Nexus_Token', 
+			credentialsId: 'NEXUS_ID', 
 			groupId: 'pom.groupId',
  			nexusUrl: '192.168.43.172',
  			nexusVersion: 'nexus3',
