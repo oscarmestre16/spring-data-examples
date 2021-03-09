@@ -11,7 +11,7 @@ pipeline {
         // Repositorio donde subiremos el artefacto
         NEXUS_REPOSITORY = "springs-data-examples-web/"
         // Identificación de credencial de Jenkins para autenticarse en Nexus OSS
-        NEXUS_ID = "Nexus_Token"
+        NEXUS_ID = "nexus-credentials"
 	}
     stages {
         stage('Setup') {
