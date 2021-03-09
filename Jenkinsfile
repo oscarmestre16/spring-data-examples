@@ -86,5 +86,6 @@ pipeline {
 				version: 'pom.parent.version'	
 				);
         }
+	 }
     }
 }
