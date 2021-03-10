@@ -79,7 +79,7 @@ pipeline {
                 script {
                     List arrayNexusProject = ["example", "projection", "querydsl"]
 
-                    for ((int i=0; i < arrayNexusProject.size(); i++) {
+                    for (int i=0; i < arrayNexusProject.size(); i++) {
                         //nexusProyecto in arrayNexusProject) {                        
                         //print nexusProyecto
                         pom = readMavenPom file: "web/" + arrayNexusProject(i) + "/pom.xml";
