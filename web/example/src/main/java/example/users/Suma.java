@@ -1,14 +1,15 @@
 package example.users;
 
 public class Suma  {
-	int num1, num2;
+	Integer num1;
+	Integer num2;
 	
-	public Suma(int num1, int num2) {
+	public Suma(Integer num1, Integer num2) {
 		this.num1 = num1;
 		this.num2 = num2;
 	}
 	
-	public int suma() {
+	public Integer suma() {
 		return this.num1 + this.num2;
 	}
 }
