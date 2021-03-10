@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>spring-data-web-example</artifactId>
+	<artifactId>spring-data-web-projection</artifactId>
 
-	<name>Spring Data - Basic web example</name>
+	<name>Spring Data - JSON and XML projection web example</name>
 
 	<parent>
 		<groupId>org.springframework.data.examples</groupId>
@@ -12,19 +12,13 @@
 		<version>2.0.0.BUILD-SNAPSHOT</version>
 	</parent>
 	
-		
 	<properties>		
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-       		<jacoco.version>0.8.2</jacoco.version>			
+        <jacoco.version>0.8.2</jacoco.version>			
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,19 +26,20 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-		</dependency>		
+			<groupId>org.xmlbeam</groupId>
+			<artifactId>xmlprojector</artifactId>
+			<version>1.4.13</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>
@@ -53,15 +48,17 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
-        <plugins>
-        
-        	<plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            
-            <plugin>
+		<finalName>maven-code-coverage</finalName>
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			 <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
@@ -82,15 +79,11 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                        	<skipAfterFailureCount>true</skipAfterFailureCount>
-                        </configuration>
                     </execution>
-
                 </executions>
             </plugin>
-
-        </plugins>
-    </build>
+			
+		</plugins>
+	</build>
 
 </project>
