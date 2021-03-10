@@ -77,9 +77,9 @@ pipeline {
         stage("Nexus") {
             steps {
                 script {
-                    List proyectsArray2 = ["example", "projection", "querydsl"]
+                   // List proyectsArray2 = ["example", "projection", "querydsl"]
 					
-					for (proyect2 in proyectsArray2) {	
+					//for (proyect2 in proyectsArray2) {	
 
                     List arrayNexusProject = ["example", "projection", "querydsl"]
 
