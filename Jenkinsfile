@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'web'
+                git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
             }
         } 
 		
