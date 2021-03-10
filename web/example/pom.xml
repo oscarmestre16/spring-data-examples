@@ -81,11 +81,8 @@
                         <phase>test</phase>
                         <goals>
                             <goal>report</goal>
-                        </goals>
-                        
-						<configuration>
-                        	<skipAfterFailureCount>true</skipAfterFailureCount>
-                        </configuration>
+                        </goals>                       
+						
                     </execution>
 
                 </executions>
