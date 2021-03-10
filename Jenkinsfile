@@ -7,8 +7,8 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         // Puede ser http o https
         NEXUS_PROTOCOL = "http"
-        // Dónde se ejecuta tu Nexus
-        NEXUS_URL = "192.168.1.57:9084"
+        // Dónde se ejecuta tu Nexus        
+        NEXUS_URL = "192.168.43.172:8081"
         // Repositorio donde subiremos el artefacto
         NEXUS_REPOSITORY = "springs-data-examples-web/"
         // Identificación de credencial de Jenkins para autenticarse en Nexus OSS
@@ -32,7 +32,7 @@ pipeline {
 					withMaven (maven: 'maven-3.6.3') {
 						for (proyect in proyectsArray) {
 							println proyect
-							sh 'mvn clean install -f ' + proyect
+							bat 'mvn clean install -f ' + proyect
 						}
 					}
 				}
@@ -45,31 +45,28 @@ pipeline {
             }
         }
 
-		// Lanzamos en paralelo la comprobacion de dependencias y los mutation test
+		 // Lanzamos en paralelo la comprobacion de dependencias y los mutation test
         stage('Mutation Test') {
-			// Lanzamos los mutation test
-			
-			steps {				
-				withMaven (maven: 'maven-3.6.3') {		
-					sh 'mvn org.pitest:pitest-maven:mutationCoverage -f web/pom.xml'				
-				}
-			}
+			// Lanzamos los mutation test			
+            steps {
+              withMaven (maven: 'Maven 3.6.3') {
+                bat 'mvn org.pitest:pitest-maven:mutationCoverage -f web/pom.xml'
+              }
+            }
 			
         }
-		
         // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
         stage('SonarQube analysis') {
-        	steps {				
-				withSonarQubeEnv(credentialsId: 'sonarQubeCredenciales', installationName: 'local') {
-					withMaven (maven: 'maven-3.6.3') {
-						sh 'mvn sonar:sonar -f web/pom.xml \
+		  steps {
+			    withSonarQubeEnv('Sonarqube') {
+				      withMaven (maven: 'Maven 3.6.3') {
+						bat 'mvn sonar:sonar -f web/pom.xml \
 						-Dsonar.sourceEncoding=UTF-8 \
 						-Dsonar.junit.reportPaths=target/surefire-reports'
-					}
-				}
-			}
-		}
-		
+				      }
+			     }
+		   }
+	    }
 		// Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
 		stage("Quality Gate") {
             steps {
@@ -125,3 +122,4 @@ pipeline {
 		}
 		
     }
+}
