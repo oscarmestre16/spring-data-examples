@@ -83,11 +83,13 @@ pipeline {
 
                     List arrayNexusProject = ["example", "projection", "querydsl"]
 
-                    for (int i = 0; i < arrayNexusProject.size(); i++ ) {                   
+                    for (String cadena: arrayNexusProject ) {      
+                        //int i = 0; i < arrayNexusProject.size(); i++
+                        //arrayNexusProject.get(i)
                         //nexusProyecto in arrayNexusProject     
                         //print nexusProyecto
-                        pom = readMavenPom file: "web/" + arrayNexusProject.get(i) + "/pom.xml";
-                        filesByGlob = findFiles(glob: "web/example" + arrayNexusProject.get(i) + "/target/*.${pom.packaging}");
+                        pom = readMavenPom file: "web/" + cadena + "/pom.xml";
+                        filesByGlob = findFiles(glob: "web/example" + cadena + "/target/*.${pom.packaging}");
                         echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                         artifactPath = filesByGlob[0].path;
                         artifactExists = fileExists artifactPath;
