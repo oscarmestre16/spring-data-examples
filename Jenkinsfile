@@ -27,7 +27,7 @@ pipeline {
 					List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]					
 					withMaven (maven: 'Maven 3.6.3') {
 						for (proyecto in arrayWebProject) {
-							println i
+							println proyecto
 							bat 'mvn clean install -f ' + proyecto
                             //mvn clean install -f web/example/pom.xml
 						}
