@@ -83,6 +83,9 @@
                             <goal>report</goal>
                         </goals>
                         
+						<configuration>
+                        	<skipAfterFailureCount>true</skipAfterFailureCount>
+                        </configuration>
                     </execution>
 
                 </executions>
