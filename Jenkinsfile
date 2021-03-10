@@ -77,22 +77,9 @@ pipeline {
         stage("Nexus") {
             steps {
                 script {
-                   // List proyectsArray2 = ["example", "projection", "querydsl"]
+                    List arrayNexusProject = ["example", "projection", "querydsl"]
 					
-					//for (proyect2 in proyectsArray2) {	
-
-                    //List arrayNexusProject = ["example", "projection", "querydsl"]
-
-                   // for (String cadena: arrayNexusProject ) {      
-                        //int i = 0; i < arrayNexusProject.size(); i++
-                        //arrayNexusProject.get(i)
-                        //nexusProyecto in arrayNexusProject     
-                        //print nexusProyecto
-                        //pom = readMavenPom file: "web/" + cadena + "/pom.xml";
-                        //filesByGlob = findFiles(glob: "web/example" + cadena + "/target/*.${pom.packaging}");
-                        List proyectsArray2 = ["example", "projection", "querydsl"]
-					
-					for (proyect2 in proyectsArray2) {						
+					for (proyect2 in arrayNexusProject) {						
 						
 						pom = readMavenPom file: "web/" + proyect2 + "/pom.xml";
 						filesByGlob = findFiles(glob: "web/" + proyect2 + "/target/*.${pom.packaging}");
