@@ -77,14 +77,12 @@ pipeline {
         stage("Nexus") {
             steps {
                 script {
-                    List arrayNexusProject = ["example", "projection", "querydsl"]
-
-                    for (nexusProyecto in arrayNexusProject) {
-                        
-                        //pom = readMavenPom file: "web/" + proyect2 + "/pom.xml";
-						//filesByGlob = findFiles(glob: "web/" + proyect2 + "/target/*.${pom.packaging}");
-                        pom = readMavenPom file: "web/" + nexusProyecto + "/pom.xml";
-                        filesByGlob = findFiles(glob: "web/example" + nexusProyecto + "/target/*.${pom.packaging}");
+                    List proyectsArray2 = ["example", "projection", "querydsl"]
+					
+					for (proyect2 in proyectsArray2) {	                   
+                       
+                        pom = readMavenPom file: "web/" + proyect2 + "/pom.xml";
+                        filesByGlob = findFiles(glob: "web/example" + proyect2 + "/target/*.${pom.packaging}");
                         echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                         artifactPath = filesByGlob[0].path;
                         artifactExists = fileExists artifactPath;
