@@ -9,7 +9,7 @@ def call(config) {
             stage('Setup') {
                 steps {
                     script {	
-                        configF = readYaml (file: configfile)
+                        configF = readYaml (file: config)
                         giturl = configF.setup.git_url
                         println "URL GIT: " + giturl
                         gitbranch = configF.setup.git_branch						  
@@ -24,7 +24,7 @@ def call(config) {
             stage('Build') {		
                 steps {
                     script {			
-                        configF = readYaml (file: configfile)
+                        configF = readYaml (file: config)
                         arrayWeb = configF.setup.arrayWebProject
                         println "Array Proyectos: " + arrayWeb
                         //List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]					
@@ -49,7 +49,7 @@ def call(config) {
                 // Lanzamos los mutation test			
                 steps {
                     script {	
-                        configF = readYaml (file: configfile)
+                        configF = readYaml (file: config)
                         pom_file = configF.setup.archivoPom
                         println "Archivo pom: " + pom_file
 
@@ -89,7 +89,7 @@ def call(config) {
             stage("Nexus") {
                 steps {
                     script {                   
-                        configF = readYaml (file: configfile)
+                        configF = readYaml (file: config)
                         NEXUS_VERSION = configF.setup.NEXUS_VERSION
                         NEXUS_PROTOCOL = configF.setup.NEXUS_PROTOCOL
                         NEXUS_REPOSITORY = configF.setup.NEXUS_REPOSITORY
