@@ -1,0 +1,10 @@
+String NEXUS_VERSION = "nexus3"
+String NEXUS_PROTOCOL = "http"
+String NEXUS_URL = "192.168.43.172:8081"
+String NEXUS_REPOSITORY = "springs-data-examples-web/"
+String NEXUS_ID = "nexus-credentials"
+String git_url = 'https://github.com/oscarmestre16/spring-data-examples.git'
+String git_branch = 'weblib'
+List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
+String archivoPom = web/pom.xml
+List arrayNexusProject = ["example", "projection", "querydsl"]
