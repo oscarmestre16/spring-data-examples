@@ -17,11 +17,12 @@ pipeline {
         NEXUS_REPOSITORY = "springs-data-examples-web/"
         // Identificación de credencial de Jenkins para autenticarse en Nexus OSS
         NEXUS_ID = "nexus-credentials"
+        giturl = "https://github.com/oscarmestre16/spring-data-examples.git"
 	}
     stages {
         stage('Setup') {
             steps {
-                setup()
+                setup(giturl,weblib)
                // git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
             }
         } 

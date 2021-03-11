@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call() {
+def call(String url, String branch) {
     
 	pipeline {
         agent any
@@ -12,7 +12,7 @@ def call() {
 				println "----------------------------------"  
 				//println "Stage Setup"
 				//println "${config}"
-                 git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
+                git url:url, branch: branch
                 println "Git ejecutado!" 
 				println "----------------------------------"     
 				
