@@ -1,3 +1,8 @@
+setup: 
+    git_url = 'https://github.com/oscarmestre16/spring-data-examples.git'
+    git_branch = 'weblib'
+    List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
+    archivoPom = web/pom.xml
 nexus:
     NEXUS_VERSION = "nexus3"
     NEXUS_PROTOCOL = "http"
@@ -5,8 +10,3 @@ nexus:
     NEXUS_REPOSITORY = "springs-data-examples-web/"
     NEXUS_ID = "nexus-credentials"
     List arrayNexusProject = ["example", "projection", "querydsl"]
-setup: 
-    git_url = 'https://github.com/oscarmestre16/spring-data-examples.git'
-    git_branch = 'weblib'
-    List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
-    archivoPom = web/pom.xml
