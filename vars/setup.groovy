@@ -16,6 +16,15 @@ def call(config) {
                     }                      
                 }                      
             }
+            stage('Setup') {
+            steps {
+				println "----------------------------------"  
+				println "Stage Setup"
+				println "${config}"
+				println "----------------------------------"     
+				
+            }
+        }
         }
     }
 }
