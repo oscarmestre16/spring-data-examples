@@ -3,7 +3,7 @@
 
 setup 'cursofile'*/
 
-#!/usr/bin/env groovy
+//#!/usr/bin/env groovy
 pipeline {
     agent any
 	environment {
