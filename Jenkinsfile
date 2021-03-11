@@ -22,7 +22,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                setup(giturl,weblib)
+                setup(giturl,'weblib')
                // git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
             }
         } 
