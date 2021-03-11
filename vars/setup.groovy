@@ -6,16 +6,7 @@ def call(config) {
         agent any
 
         stages {
-            stage('Test Stage') {                       
-                steps {                       
-                    script {                       
-                        timeout(time: 5, unit: 'MINUTES') {                       
-                            input 'Pipeline Executing!'                       
-                        }                      
-                        println "Pipeline completado!"                       
-                    }                      
-                }                      
-            }
+           
             stage('Setup') {
             steps {
 				println "----------------------------------"  
