@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
 
 def call(String url, String branch) {
-    
-	pipeline {
+    git url:url, branch: branch
+                println "Git ejecutado!" 
+	/*pipeline {
         agent any
 
         stages {
@@ -12,14 +13,13 @@ def call(String url, String branch) {
 				println "----------------------------------"  
 				//println "Stage Setup"
 				//println "${config}"
-                git url:url, branch: branch
-                println "Git ejecutado!" 
+                
 				println "----------------------------------"     
 				
             }
         }
         }
-    }
+    }*/
 }
 
 /*#!/usr/bin/env groovy
