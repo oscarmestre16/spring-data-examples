@@ -7,10 +7,10 @@ pipeline {
                     println "----------------------------------"  
                     script {
                         def props = readProperties file: 'cursofile.properties'
-                        env.git_url = props.git_url
-                        env.git_branch = props.git_branch
+                        env.github_url = props.git_url
+                        env.github_branch = props.git_branch
                         
-                        git url: git_url, branch: git_branch
+                        git url: github_url, branch: github_branch
                     }                    
                     println "----------------------------------"     
                     
