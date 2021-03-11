@@ -8,14 +8,16 @@ def call(config) {
 	    stages {
             stage('Setup') {
                 steps {
-                    configF = readYaml (file: configfile)
-                    giturl = configF.setup.git_url
-                    println "URL GIT: " + giturl
-                    gitbranch = configF.setup.git_branch						  
-                    println "RAMA GIT: " + gitbranch
-                        
-                    git url: giturl, branch: gitbranch
-                    //git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
+                    script {	
+                        configF = readYaml (file: configfile)
+                        giturl = configF.setup.git_url
+                        println "URL GIT: " + giturl
+                        gitbranch = configF.setup.git_branch						  
+                        println "RAMA GIT: " + gitbranch
+                            
+                        git url: giturl, branch: gitbranch
+                        //git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
+                    }
                 }
             } 
             // Compilamos el proyecto y almacenamos los test unitarios y de integracion
@@ -46,27 +48,31 @@ def call(config) {
             stage('Mutation Test') {
                 // Lanzamos los mutation test			
                 steps {
-                    configF = readYaml (file: configfile)
-                    pom_file = configF.setup.archivoPom
-                    println "Archivo pom: " + pom_file
+                    script {	
+                        configF = readYaml (file: configfile)
+                        pom_file = configF.setup.archivoPom
+                        println "Archivo pom: " + pom_file
 
-                    withMaven (maven: 'Maven 3.6.3') {
-                        bat 'mvn org.pitest:pitest-maven:mutationCoverage -f ' + pom_file
+                        withMaven (maven: 'Maven 3.6.3') {
+                            bat 'mvn org.pitest:pitest-maven:mutationCoverage -f ' + pom_file
+                        }
                     }
                 }
                 
             }
             // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
             stage('SonarQube analysis') {
-            steps {
-                    withSonarQubeEnv('Sonarqube') {
-                        withMaven (maven: 'Maven 3.6.3') {
-                            bat 'mvn sonar:sonar -f web/pom.xml \
-                            -Dsonar.sourceEncoding=UTF-8 \
-                            -Dsonar.junit.reportPaths=target/surefire-reports'
+                steps {
+                    script {	
+                        withSonarQubeEnv('Sonarqube') {
+                            withMaven (maven: 'Maven 3.6.3') {
+                                bat 'mvn sonar:sonar -f web/pom.xml \
+                                -Dsonar.sourceEncoding=UTF-8 \
+                                -Dsonar.junit.reportPaths=target/surefire-reports'
+                            }
                         }
                     }
-            }
+                }
             }
             // Esperamos hasta que se genere el QG y fallamos o no el job dependiendo del estado del mismo
             stage("Quality Gate") {
