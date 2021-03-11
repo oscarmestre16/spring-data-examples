@@ -1,9 +1,8 @@
 #!/usr/bin/env groovy
 
 def call(config) {
-     git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
-     println "Git ejecutado!" 
-	/*pipeline {
+    
+	pipeline {
         agent any
 
         stages {
@@ -11,14 +10,16 @@ def call(config) {
             stage('Setup') {
             steps {
 				println "----------------------------------"  
-				println "Stage Setup"
-				println "${config}"
+				//println "Stage Setup"
+				//println "${config}"
+                 git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
+     println "Git ejecutado!" 
 				println "----------------------------------"     
 				
             }
         }
         }
-    }*/
+    }
 }
 
 /*#!/usr/bin/env groovy
