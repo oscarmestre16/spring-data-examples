@@ -66,7 +66,7 @@ def call(config) {
                     script {	
                         withSonarQubeEnv('Sonarqube') {
                             withMaven (maven: 'Maven 3.6.3') {
-                                bat 'mvn sonar:sonar -f ' + ficheroPom + ' \
+                                bat 'mvn sonar:sonar -f ' + pom_file + ' \
                                 -Dsonar.sourceEncoding=UTF-8 \
                                 -Dsonar.junit.reportPaths=target/surefire-reports'
                             }
