@@ -1,6 +1,6 @@
 setup: 
-    git_url = 'https://github.com/oscarmestre16/spring-data-examples.git'
-    git_branch = 'weblib'
+    url = 'https://github.com/oscarmestre16/spring-data-examples.git'
+    branch = 'weblib'
     List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
     archivoPom = web/pom.xml
 nexus:
