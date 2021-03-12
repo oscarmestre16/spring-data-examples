@@ -10,9 +10,9 @@ def call(config) {
                 steps {
                     script {	
                         configF = readYaml (file: config)
-                        giturl = configF.setup.url
+                        giturl = configF.setup.setup_url
                         println "URL GIT: " + giturl
-                        gitbranch = configF.setup.branch						  
+                        gitbranch = configF.setup.setup_branch						  
                         println "RAMA GIT: " + gitbranch
                             
                         git url: giturl, branch: gitbranch
