@@ -66,7 +66,7 @@ def call(config) {
                     script {	
                         withSonarQubeEnv('Sonarqube') {
                             withMaven (maven: 'Maven 3.6.3') {
-                                bat 'mvn sonar:sonar -f web/pom.xml \
+                                bat 'mvn sonar:sonar -f ' + ficheroPom + ' \
                                 -Dsonar.sourceEncoding=UTF-8 \
                                 -Dsonar.junit.reportPaths=target/surefire-reports'
                             }
@@ -97,6 +97,7 @@ def call(config) {
                         arrayNexus = configF.setup.arrayNexusProject
                     
                         println "Datos Nexus: " + " \nVersion Nexus: "+NEXUS_VERSION+" \nProtocolo: "+NEXUS_PROTOCOL+" \nRepositorio: "+NEXUS_REPOSITORY+" \nID: "+NEXUS_ID+" \nArray: "+arrayNexus 
+                         println "Array Proyectos: " + arrayNexus
                         //List arrayNexusProject = ["example", "projection", "querydsl"]
                         
                         for (proyect2 in arrayNexus) {						
