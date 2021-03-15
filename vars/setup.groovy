@@ -109,7 +109,7 @@ def call(config) {
 						println "URL Nexus: " + NEXUS_URL
 						NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
 						println "Reporitorio Nexus: " + NEXUS_REPOSITORY
-						NEXUS_CREDENTIAL_ID = configF.nexus.NEXUS_CREDENTIAL_ID
+						NEXUS_ID = configF.nexus.NEXUS_ID
 						println "Credenciales Nexus: " + NEXUS_ID
 						println "----------------------------------" 
 						
