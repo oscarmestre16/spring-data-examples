@@ -58,7 +58,6 @@ def call(config) {
                         }
                     }
                 }
-                
             }
             // Analizamos con SonarQube el proyecto y pasamos los informes generados (test, cobertura, mutation)
             stage('SonarQube analysis') {
@@ -95,29 +94,11 @@ def call(config) {
                         NEXUS_URL = configF.nexus.NEXUS_URL
                         NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
                         NEXUS_ID = configF.nexus.NEXUS_ID
-                        arrayNexus = configF.nexus.arrayNexusProject
-                        
-						/*configF = readYaml (file: config)
-						println "Configuraciones para utilizar Nexus"
-						proyectsArray2 = configF.nexus.proyectsArray2
-						println "Lista de arrays de los subproyectos: " + proyectsArray2
-						NEXUS_VERSION = configF.nexus.NEXUS_VERSION
-						println "Version Nexus: " + NEXUS_VERSION
-						NEXUS_PROTOCOL = configF.nexus.NEXUS_PROTOCOL
-						println "Protocolo Nexus: " + NEXUS_PROTOCOL
-						NEXUS_URL = configF.nexus.NEXUS_URL
-						println "URL Nexus: " + NEXUS_URL
-						NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
-						println "Reporitorio Nexus: " + NEXUS_REPOSITORY
-						NEXUS_ID = configF.nexus.NEXUS_ID
-						println "Credenciales Nexus: " + NEXUS_ID
-						println "----------------------------------" */
+                        arrayNexus = configF.nexus.arrayNexusProject                
 						
-                        println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos de Nexus: " + arrayNexus
-                        //println "Array Proyectos: " + arrayNexus
-                        //List arrayNexusProject = ["example", "projection", "querydsl"]
-                        
-                        for (proyect2 in arrayNexus) {						
+						println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos de Nexus: " + arrayNexus
+                                                
+                        for (proyect2 in arrayNexus) {
                             
                             pom = readMavenPom file: "web/" + proyect2 + "/pom.xml";
                             filesByGlob = findFiles(glob: "web/" + proyect2 + "/target/*.${pom.packaging}");
