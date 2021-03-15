@@ -96,8 +96,13 @@ def call(config) {
                         NEXUS_ID = configF.setup.NEXUS_ID
                         arrayNexus = configF.setup.arrayNexusProject
                     
-                        println "Datos Nexus: " + " \nVersion Nexus: "+NEXUS_VERSION+" \nProtocolo: "+NEXUS_PROTOCOL+" \nRepositorio: "+NEXUS_REPOSITORY+" \nID: "+NEXUS_ID+" \nArray: "+arrayNexus 
-                         println "Array Proyectos: " + arrayNexus
+                        println "Datos Nexus: " 
+                        println "Version Nexus: "+NEXUS_VERSION
+                        println "Protocolo: "+NEXUS_PROTOCOL
+                        println "Repositorio: "+NEXUS_REPOSITORY
+                        println "ID: "+NEXUS_ID
+                        println "Array: "+arrayNexus 
+                        //println "Array Proyectos: " + arrayNexus
                         //List arrayNexusProject = ["example", "projection", "querydsl"]
                         
                         for (proyect2 in arrayNexus) {						
