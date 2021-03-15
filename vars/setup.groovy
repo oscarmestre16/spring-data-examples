@@ -89,27 +89,31 @@ def call(config) {
             stage("Nexus") {
                 steps {
                     script {                   
-                        configF = readYaml (file: config)
+                        /*configF = readYaml (file: config)
                         NEXUS_VERSION = configF.nexus.NEXUS_VERSION
                         NEXUS_PROTOCOL = configF.nexus.NEXUS_PROTOCOL
                         NEXUS_URL = configF.nexus.NEXUS_URL
                         NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
                         NEXUS_ID = configF.nexus.NEXUS_ID
-                        arrayNexus = configF.nexus.arrayNexusProject
-                        /*p
+                        arrayNexus = configF.nexus.arrayNexusProject*/
+                        
+						configF = readYaml (file: config)
+						println "Configuraciones para utilizar Nexus"
 						proyectsArray2 = configF.nexus.proyectsArray2
-						
+						println "Lista de arrays de los subproyectos: " + proyectsArray2
 						NEXUS_VERSION = configF.nexus.NEXUS_VERSION
-						
+						println "Version Nexus: " + NEXUS_VERSION
 						NEXUS_PROTOCOL = configF.nexus.NEXUS_PROTOCOL
-						
+						println "Protocolo Nexus: " + NEXUS_PROTOCOL
 						NEXUS_URL = configF.nexus.NEXUS_URL
-						
+						println "URL Nexus: " + NEXUS_URL
 						NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
-						
+						println "Reporitorio Nexus: " + NEXUS_REPOSITORY
 						NEXUS_CREDENTIAL_ID = configF.nexus.NEXUS_CREDENTIAL_ID
-						*/
-                        println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos: " + arrayNexus
+						println "Credenciales Nexus: " + NEXUS_ID
+						println "----------------------------------" 
+						
+                        //println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos: " + arrayNexus
                         //println "Array Proyectos: " + arrayNexus
                         //List arrayNexusProject = ["example", "projection", "querydsl"]
                         
