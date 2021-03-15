@@ -94,13 +94,13 @@ def call(config) {
                         NEXUS_VERSION = configF.setup.NEXUS_VERSION
                         println "Version Nexus: " + NEXUS_VERSION
                         NEXUS_PROTOCOL = configF.setup.NEXUS_PROTOCOL
-                        println "Protocolo: " + NEXUS_PROTOCOL
+                       // println "Protocolo: " + NEXUS_PROTOCOL
                         NEXUS_REPOSITORY = configF.setup.NEXUS_REPOSITORY
-                        println "Repositorio: " + NEXUS_REPOSITORY
+                       // println "Repositorio: " + NEXUS_REPOSITORY
                         NEXUS_ID = configF.setup.NEXUS_ID
-                        println "Credenciales Nexus - ID: " + NEXUS_ID
+                       // println "Credenciales Nexus - ID: " + NEXUS_ID
                         arrayNexus = configF.setup.arrayNexusProject
-                        println "Array Proyectos: " + arrayNexus
+                        //println "Array Proyectos: " + arrayNexus
                         
                         //List arrayNexusProject = ["example", "projection", "querydsl"]
                         /*println "----------------------------------" 
@@ -119,7 +119,7 @@ def call(config) {
 						NEXUS_CREDENTIAL_ID = configF.nexus.NEXUS_CREDENTIAL_ID
 						println "Credenciales Nexus: " + NEXUS_CREDENTIAL_ID
 						println "----------------------------------"  */
-                        
+
                         for (proyect2 in arrayNexus) {						
                             
                             pom = readMavenPom file: "web/" + proyect2 + "/pom.xml";
