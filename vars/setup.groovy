@@ -89,15 +89,15 @@ def call(config) {
             stage("Nexus") {
                 steps {
                     script {                   
-                        /*configF = readYaml (file: config)
+                        configF = readYaml (file: config)
                         NEXUS_VERSION = configF.nexus.NEXUS_VERSION
                         NEXUS_PROTOCOL = configF.nexus.NEXUS_PROTOCOL
                         NEXUS_URL = configF.nexus.NEXUS_URL
                         NEXUS_REPOSITORY = configF.nexus.NEXUS_REPOSITORY
                         NEXUS_ID = configF.nexus.NEXUS_ID
-                        arrayNexus = configF.nexus.arrayNexusProject*/
+                        arrayNexus = configF.nexus.arrayNexusProject
                         
-						configF = readYaml (file: config)
+						/*configF = readYaml (file: config)
 						println "Configuraciones para utilizar Nexus"
 						proyectsArray2 = configF.nexus.proyectsArray2
 						println "Lista de arrays de los subproyectos: " + proyectsArray2
@@ -111,9 +111,9 @@ def call(config) {
 						println "Reporitorio Nexus: " + NEXUS_REPOSITORY
 						NEXUS_ID = configF.nexus.NEXUS_ID
 						println "Credenciales Nexus: " + NEXUS_ID
-						println "----------------------------------" 
+						println "----------------------------------" */
 						
-                        //println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos: " + arrayNexus
+                        println "Datos Nexus: " + " \nVersion Nexus: "+ NEXUS_VERSION +" \nProtocolo: "+NEXUS_PROTOCOL+" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID + " \nArray Proyectos de Nexus: " + arrayNexus
                         //println "Array Proyectos: " + arrayNexus
                         //List arrayNexusProject = ["example", "projection", "querydsl"]
                         
