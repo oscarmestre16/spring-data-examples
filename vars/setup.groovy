@@ -28,22 +28,9 @@ def call(config) {
                         configF = readYaml (file: config)
                         NEXUS_IMAGE = configF.nexus.NEXUS_IMAGE
                         println "Imagen de nexus: " + NEXUS_IMAGE
-                       /* println "Array Proyectos: " + arrayWeb
-                        //List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]					
-                        withMaven (maven: 'Maven 3.6.3') {
-                            for (proyecto in arrayWeb) {
-                                println proyecto
-                                bat 'mvn clean install -f ' + proyecto
-                                //mvn clean install -f web/example/pom.xml
-                            }
-                        }    */       
+                        sh 'docker build -t' +  NEXUS_IMAGE + ' .'      
                     }
-                }
-                post {
-                    always {
-                        junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
-                    }
-                }		
+                }	
             }
            /* // Compilamos el proyecto y almacenamos los test unitarios y de integracion
             stage('Build') {		
