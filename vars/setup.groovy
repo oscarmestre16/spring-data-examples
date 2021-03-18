@@ -10,17 +10,42 @@ def call(config) {
                 steps {
                     script {	
                         configF = readYaml (file: config)
-                        giturl = configF.setup.setup_url
-                        println "URL GIT: " + giturl
-                        gitbranch = configF.setup.setup_branch						  
-                        println "RAMA GIT: " + gitbranch
+                        git_url = configF.setup.url
+                        println "URL GIT: " + git_url
+                        git_branch = configF.setup.branch						  
+                        println "RAMA GIT: " + git_branch
                             
-                        git url: giturl, branch: gitbranch
+                        git url: giturl, branch: git_branch
                         //git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
                     }
                 }
             } 
             // Compilamos el proyecto y almacenamos los test unitarios y de integracion
+            stage('Dockerfile-Build') {		
+                steps {
+                    script {		
+                        println "---------------------------------"
+                        configF = readYaml (file: config)
+                        NEXUS_IMAGE = configF.nexus.NEXUS_IMAGE
+                        println "Imagen de nexus: " + NEXUS_IMAGE
+                       /* println "Array Proyectos: " + arrayWeb
+                        //List arrayWebProject = ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]					
+                        withMaven (maven: 'Maven 3.6.3') {
+                            for (proyecto in arrayWeb) {
+                                println proyecto
+                                bat 'mvn clean install -f ' + proyecto
+                                //mvn clean install -f web/example/pom.xml
+                            }
+                        }    */       
+                    }
+                }
+                post {
+                    always {
+                        junit 'web/example/target/surefire-reports/*.xml, web/projection/target/surefire-reports/*.xml, web/querydsl/target/surefire-reports/*.xml'
+                    }
+                }		
+            }
+           /* // Compilamos el proyecto y almacenamos los test unitarios y de integracion
             stage('Build') {		
                 steps {
                     script {			
@@ -132,7 +157,7 @@ def call(config) {
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }   
