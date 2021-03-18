@@ -28,7 +28,8 @@ def call(config) {
                         configF = readYaml (file: config)
                         NEXUS_IMAGE = configF.nexus.NEXUS_IMAGE
                         println "Imagen de nexus: " + NEXUS_IMAGE
-                        bat 'docker build -t ' + NEXUS_IMAGE + ' .'     
+                        bat 'docker build -t ' + NEXUS_IMAGE + ' .' 
+                        //sh 'docker build -t ' + NEXUS_IMAGE + ' .' 
                     }
                 }	
             }
