@@ -1,6 +1,6 @@
 setup:
-    url: 'https://github.com/oscarmestre16/spring-data-examples.git'
-    branch:  'docker_image'
+    setup_url: 'https://github.com/oscarmestre16/spring-data-examples.git'
+    setup_branch:  'docker_image'
     arrayWebProject : ["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
 nexus:    
     NEXUS_URL: "192.168.43.172:8081"
