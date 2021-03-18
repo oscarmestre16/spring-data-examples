@@ -28,7 +28,7 @@ def call(config) {
                         configF = readYaml (file: config)
                         NEXUS_IMAGE = configF.nexus.NEXUS_IMAGE
                         println "Imagen de nexus: " + NEXUS_IMAGE
-                        sh 'docker build -t' +  NEXUS_IMAGE + ' .'      
+                        bat 'docker build -t ' + NEXUS_IMAGE + ' .'     
                     }
                 }	
             }
@@ -44,10 +44,10 @@ def call(config) {
 
                         println "Datos Nexus: " + " \nImagen de nexus: "+ NEXUS_IMAGE +" \nURL: " + NEXUS_URL + " \nRepositorio: " + NEXUS_REPOSITORY + " \nCredenciales Nexus - ID: " + NEXUS_ID 
 
-                        sh 'docker image ls' 
+                        bat 'docker image ls' 
                         withDockerRegistry(credentialsId: 'nexus-credentials', url: '192.168.43.172:8081') {
-                           sh 'docker tag' + NEXUS_IMAGE +' '+ NEXUS_URL + NEXUS_REPOSITORY + NEXUS_IMAGE
-                           sh 'docker push' + NEXUS_URL + NEXUS_REPOSITORY + NEXUS_IMAGE
+                           bat 'docker tag' + NEXUS_IMAGE +' '+ NEXUS_URL + NEXUS_REPOSITORY + NEXUS_IMAGE
+                           bat 'docker push' + NEXUS_URL + NEXUS_REPOSITORY + NEXUS_IMAGE
                         }                                               
                              
                     }
