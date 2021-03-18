@@ -15,7 +15,7 @@ def call(config) {
                         git_branch = configF.setup.setup_branch						  
                         println "RAMA GIT: " + git_branch
                             
-                        git url: giturl, branch: git_branch
+                        git url: git_url, branch: git_branch
                         //git url:'https://github.com/oscarmestre16/spring-data-examples.git', branch: 'weblib'
                     }
                 }
