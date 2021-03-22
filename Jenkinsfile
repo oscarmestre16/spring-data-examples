@@ -77,15 +77,15 @@ pipeline {
         stage("Nexus") {
             steps {
                 script {
-                    List arrayNexusProject = ["example", "projection", "querydsl"]
+                    List arrayNexusProject =["web/example/pom.xml", "web/projection/pom.xml", "web/querydsl/pom.xml"]
 
 					withMaven (maven: 'Maven 3.6.3') {
-                        /*for (proyecto2 in arrayNexusProject) {						
+                        for (proyecto2 in arrayNexusProject) {						
                             println proyecto2
 
                             bat 'mvn clean install -f ' + proyecto2                            
-                        }*/
-                        bat 'mvn clean deploy -f web/example/pom.xml'
+                        }
+                       // bat 'mvn clean deploy -f web/example/pom.xml'
                     }
                 }
             }
