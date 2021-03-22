@@ -21,7 +21,7 @@
 	<distributionManagement>
 	   <snapshotRepository>
 	      <id>nexus</id>
-		  <url>http://192.168.43.172:8081/repository/spring-data-examples-maven/</url>
+		  <url>http://192.168.43.172:8081/repository/springs-data-web-maven/</url>
 	   </snapshotRepository>
 	</distributionManagement>
 

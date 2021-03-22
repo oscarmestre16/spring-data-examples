@@ -12,7 +12,6 @@
 		<version>2.0.0.BUILD-SNAPSHOT</version>
 	</parent>
 	
-		
 	<properties>		
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -22,7 +21,7 @@
 	<distributionManagement>
 	   <snapshotRepository>
 	      <id>nexus</id>
-		  <url>http://192.168.43.172:8081/repository/spring-data-examples-maven/</url>
+		  <url>http://192.168.43.172:8081/repository/springs-data-web-maven/</url>
 	   </snapshotRepository>
 	</distributionManagement>
 
