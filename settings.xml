@@ -65,4 +65,10 @@
 			</repositories>
 		</profile>
 	</profiles>
+
+    <server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>admin</password>
+    </server>
 </settings>
