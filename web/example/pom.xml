@@ -19,6 +19,13 @@
        		<jacoco.version>0.8.2</jacoco.version>			
 	</properties>
 
+	<distributionManagement>
+	   <snapshotRepository>
+	      <id>Nexus - Repository</id>
+		  <url>http://192.168.43.172:8081/repository/spring-data-examples-maven/</url>
+	   </snapshotRepository>
+	</distributionManagement>
+
 	<dependencies>
 
 		<dependency>
