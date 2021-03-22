@@ -79,7 +79,7 @@ pipeline {
                 script {
                     List arrayNexusProject = ["example", "projection", "querydsl"]
 
-					withMaven (maven: 'maven-3.6.3') {
+					withMaven (maven: 'Maven 3.6.3') {
                         for (proyecto2 in arrayNexusProject) {						
                             println proyecto2
                             bat 'mvn clean deploy -f ' + proyecto2
