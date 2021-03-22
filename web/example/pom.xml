@@ -112,6 +112,7 @@
 			      <nexusUrl>http://192.168.43.172:8081/repository/</nexusUrl>
 			   </configuration>
 			</plugin>
+
         </plugins>
     </build>
 
