@@ -1,18 +1,7 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
-	environment {
-        // Puede ser nexus3 o nexus2
-        NEXUS_VERSION = "nexus3"
-        // Puede ser http o https
-        NEXUS_PROTOCOL = "http"
-        // Dónde se ejecuta tu Nexus        
-        NEXUS_URL = "192.168.43.172:8081"
-        // Repositorio donde subiremos el artefacto
-        NEXUS_REPOSITORY = "springs-data-examples-web/"
-        // Identificación de credencial de Jenkins para autenticarse en Nexus OSS
-        NEXUS_ID = "nexus-credentials"
-	}
+	
     stages {
         stage('Setup') {
             steps {
